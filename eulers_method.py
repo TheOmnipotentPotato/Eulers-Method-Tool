@@ -10,8 +10,6 @@ def float_range(start: float, stop: float, step: float=0.1)->float:
         yield start
         start += step
 
-
-
 def eulers_method(step: float, start: float, stop: float, y_initial: float, function)->list:
     y_n: float = y_initial
     output_nums: float = [(start, y_n)]
@@ -28,16 +26,8 @@ def ploter(data_frame, name)->None:
     print("graph image saved succesfully")
     fig.show()
 
-def creat_data_frame(input_list: list):
+def create_data_frame(input_list: list)->pd.DataFrame:
     return pd.DataFrame(dict(x = [i[0] for i in input_list], y = [i[1] for i in input_list]))
-
-print(eulers_method(0.1, 0, 0.5, 1, lambda x, y: y - x - 1))
-
-
-
-def creat_user_function(function_rule: str):
-    return eval(f"lambda x, y: {function_rule}")
-
 
 def main()->None:
     graph_name: str = input("Chose a name for the output graph: ")
@@ -49,8 +39,9 @@ def main()->None:
     vals = eulers_method(step, start, stop, y_initial, function)
     for i in vals:
         print(i)
-    df = creat_data_frame(vals)
+    df = create_data_frame(vals)
     ploter(df, graph_name)
+    return None
 
 if __name__ == "__main__":
     main()
